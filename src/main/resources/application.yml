@@ -1,0 +1,28 @@
+server:
+  compression:
+    enabled: true
+  port: 8080
+  servlet:
+    context-path: /api-marvel
+services:
+  api-marvel:
+    url: ${URL_API_MARVEL:http://gateway.marvel.com}
+spring:
+  jackson:
+    time-zone: America/Sao_Paulo
+  jmx:
+    enabled: false
+  messages:
+    basename: i18n/messages
+
+
+springfox:
+  documentation:
+    info:
+      title: API Marvel
+      description: Consumir serviço Marvel
+      version: 1.0
+    base-package: br.com.marvel.teste
+    apis:
+      - name: Api
+        description: Serviços para ...

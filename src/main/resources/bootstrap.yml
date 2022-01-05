@@ -1,0 +1,11 @@
+logging:
+  level:
+    root: WARN 
+
+spring:
+  application:
+    name: api-marvel
+    discovery:
+      enabled: false
+    refresh:
+      enabled: false
