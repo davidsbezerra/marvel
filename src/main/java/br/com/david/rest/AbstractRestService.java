@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import br.com.david.exception.ClientErrorException;
 import br.com.david.domain.ErrorType;
+import br.com.david.integration.marvel.response.MarvelAuthorizationResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -51,8 +52,6 @@ public abstract class AbstractRestService {
         return new HttpEntity<>(request, httpHeaders);
     }
 
-
-
     protected ClientErrorException getError(final HttpStatusCodeException ex) {
         log.error("Falha na API: [httpStatusCode:{}] [responseBody:{}]", ex.getRawStatusCode(),
                 ex.getResponseBodyAsString());
@@ -62,4 +61,5 @@ public abstract class AbstractRestService {
     }
 
     protected abstract String getBaseUrl();
-}
+
+ }

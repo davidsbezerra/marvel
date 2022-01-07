@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AutenticarMarvelService {
+public class ConsultarMarvelComicsService {
 
     private final Marvelntegration marvelntegration;
 
@@ -18,7 +18,7 @@ public class AutenticarMarvelService {
 
         log.info("Autorizando para o hash {}", hash);
 
-        return marvelntegration.authorization(ts, apikey, hash);
+        return marvelntegration.comics(ts, apikey, hash);
      }
 
 }

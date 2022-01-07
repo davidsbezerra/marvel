@@ -2,14 +2,17 @@ package br.com.david.web;
 
 import static org.springframework.http.HttpStatus.OK;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.david.service.AutenticarMarvelService;
-import br.com.david.service.ConsultarRegistrosCompletosService;
+import br.com.david.domain.characters.Result;
+import br.com.david.service.ConsultarMarvelComicsService;
+import br.com.david.service.ConsultarCharactersFullService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -17,24 +20,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MarvelController {
 
-    private final AutenticarMarvelService autenticarMarvelService;
-    private final ConsultarRegistrosCompletosService consultarRegistrosCompletosService;
+    private final ConsultarMarvelComicsService autenticarMarvelService;
+    private final ConsultarCharactersFullService consultarCharactersFullService;
 
-    @GetMapping("/autorizar")
+    @GetMapping("/listar-characters")
     @ResponseStatus(OK)
-    public void authorization(
+    public List<Result> listarCharacters(
         @RequestParam(value = "ts") final String ts,
         @RequestParam(value = "apikey") final String apikey,
-        @RequestParam(value = "hash") final String hash) {
+        @RequestParam(value = "hash") final String hash,
+        @RequestParam(value = "offset", required = false) final Integer offset){
 
-        autenticarMarvelService.autorizar(ts, apikey, hash);
-    }
-
-    @GetMapping("/buscar-registros")
-    @ResponseStatus(OK)
-    public void buscarRegistros(@RequestParam(value = "paramBusca") final String paramBusca) {
-
-        consultarRegistrosCompletosService.consultar(paramBusca);
+       return  consultarCharactersFullService.consultar(ts, apikey, hash, offset);
     }
 
 }
